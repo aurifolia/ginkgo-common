@@ -13,4 +13,7 @@
 	<packaging>pom</packaging>
 	<name>ginkgo-common</name>
 	<description>Universal module of Ginkgo</description>
+	<modules>
+		<module>ginkgo-common-logging</module>
+	</modules>
 </project>

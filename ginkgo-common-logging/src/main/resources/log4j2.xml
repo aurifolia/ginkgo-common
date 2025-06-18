@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="60">
+    <Properties>
+        <!-- 日志输出格式 -->
+        <Property name="layoutPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %logger{36}: %m%n"/>
+
+        <!-- 日志目录与文件名基础配置 -->
+        <Property name="logDir" value="${sys:LOG_FILE_PATH:-/var/log}"/>
+        <Property name="logName" value="${sys:LOG_FILE_BASE_NAME:-application}"/>
+        <Property name="logFile" value="${logDir}/${logName}.log"/>
+        <Property name="logPattern" value="${logDir}/${logName}_%d{yyyyMMdd}_%i.log.gz"/>
+
+        <!-- 滚动参数 -->
+        <Property name="maxLogFileSize" value="${sys:MAX_LOG_FILE_SIZE:-100MB}"/>
+        <Property name="maxBackupLogFiles" value="${sys:MAX_BACKUP_LOG_FILES:-30}"/>
+
+        <!-- 日志级别 -->
+        <Property name="logLevel" value="${sys:LOG_LEVEL:-INFO}"/>
+    </Properties>
+
+    <Appenders>
+        <!-- 控制台输出 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${layoutPattern}"/>
+        </Console>
+
+        <!-- 支持大小 + 时间 + 启动滚动 的滚动文件输出 -->
+        <RollingRandomAccessFile name="FileAppender"
+                                 fileName="${logFile}"
+                                 filePattern="${logPattern}">
+            <PatternLayout pattern="${layoutPattern}"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="${maxLogFileSize}"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <DefaultRolloverStrategy max="${maxBackupLogFiles}"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <AsyncRoot level="${logLevel}">
+            <Select>
+                <SystemPropertyArbiter propertyName="log2Console" propertyValue="false">
+                </SystemPropertyArbiter>
+                <DefaultArbiter>
+                    <AppenderRef ref="Console" />
+                </DefaultArbiter>
+            </Select>
+            <SystemPropertyArbiter propertyName="log2File" propertyValue="true">
+                <AppenderRef ref="RollingFile" />
+            </SystemPropertyArbiter>
+        </AsyncRoot>
+    </Loggers>
+</Configuration>
