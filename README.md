@@ -26,3 +26,9 @@ Ginkgo logging module
 |---------------------|------------------------------|---------------|
 | -Dlog2Console=false | Disable console log printing | true          |
 | -Dlog2File=true     | Enable file log printing     | false         |
+
+## ginkgo-common-id-generator
+
+### Description
+
+Ginkgo id generator module

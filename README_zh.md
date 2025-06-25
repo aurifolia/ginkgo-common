@@ -26,3 +26,9 @@ Ginkgo日志模块
 |---------------------|------------------------------|-------|
 | -Dlog2Console=false | Disable console log printing | true  |
 | -Dlog2File=true     | Enable file log printing     | false |
+
+## ginkgo-common-id-generator
+
+### 简介
+
+Ginkgo ID生成模块
