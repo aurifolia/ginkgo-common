@@ -20,6 +20,18 @@ public class RetryFunction {
      * 重试
      *
      * @param retryTimes 重试次数
+     * @param supplier 重试方法
+     * @param <T> 返回值类型
+     * @return 返回值
+     */
+    public static <T> T retry(int retryTimes, Supplier<T> supplier) {
+        return retry(retryTimes, 0L, false, supplier);
+    }
+
+    /**
+     * 重试
+     *
+     * @param retryTimes 重试次数
      * @param sleepMillis 休眠时间
      * @param jitter 是否抖动休眠时间
      * @param supplier 重试方法
