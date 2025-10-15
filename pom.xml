@@ -16,5 +16,6 @@
     <modules>
         <module>ginkgo-common-logging</module>
         <module>ginkgo-common-utils</module>
+        <module>ginkgo-common-core</module>
     </modules>
 </project>
