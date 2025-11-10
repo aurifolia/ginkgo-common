@@ -1,7 +1,7 @@
 package org.aurifolia.cloud.common.core.condition;
 
 
-import org.aurifolia.cloud.common.core.annotation.ConditionalOnPropertyExists;
+import org.aurifolia.cloud.common.core.annotation.ConditionalOnPropertyPrefix;
 import org.springframework.boot.autoconfigure.condition.ConditionOutcome;
 import org.springframework.boot.autoconfigure.condition.SpringBootCondition;
 import org.springframework.context.annotation.ConditionContext;
@@ -17,10 +17,10 @@ import java.util.Arrays;
  * @author Peng Dan
  * @since 1.0
  */
-public class OnPropertyExists extends SpringBootCondition {
+public class OnPropertyPrefix extends SpringBootCondition {
     @Override
     public ConditionOutcome getMatchOutcome(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        String key = metadata.getAnnotations().get(ConditionalOnPropertyExists.class).synthesize().value();
+        String key = metadata.getAnnotations().get(ConditionalOnPropertyPrefix.class).synthesize().value();
         ConfigurableEnvironment environment = (ConfigurableEnvironment) context.getEnvironment();
         boolean match = environment.getPropertySources().stream()
                 .filter(propertySource -> propertySource instanceof EnumerablePropertySource)

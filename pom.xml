@@ -18,4 +18,14 @@
         <module>ginkgo-common-utils</module>
         <module>ginkgo-common-core</module>
     </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.aurifolia.cloud</groupId>
+                <artifactId>ginkgo-common-logging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
